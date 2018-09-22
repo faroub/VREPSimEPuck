@@ -1,0 +1,8 @@
+
+global M2MM MM2M RAD2DEG DEG2RAD
+
+% conversion constants
+M2MM=1000;
+MM2M=1/1000;
+RAD2DEG=180/pi;
+DEG2RAD=pi/180;
