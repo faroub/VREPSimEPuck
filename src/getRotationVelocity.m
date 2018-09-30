@@ -3,9 +3,10 @@ function [ vr, vl ] = getRotationVelocity(delta_phi, delta_t)
 
 global ROBOT_WHEEL_RADUIS ROBOT_DISTANCE_BETWEEN_WHEELS
 
+
 % arc lengths
-br = (delta_phi) * (ROBOT_DISTANCE_BETWEEN_WHEELS/2); % mm
-bl = -(delta_phi) * (ROBOT_DISTANCE_BETWEEN_WHEELS/2); % mm
+br = (delta_phi) * (ROBOT_DISTANCE_BETWEEN_WHEELS/2); % m
+bl = -(delta_phi) * (ROBOT_DISTANCE_BETWEEN_WHEELS/2); % m
 
 br=br/ROBOT_WHEEL_RADUIS;
 bl=bl/ROBOT_WHEEL_RADUIS;

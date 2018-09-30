@@ -30,13 +30,13 @@ function moveEpuck()
     
     %----- attractive forcelet parameters ---
     % strength of attraction
-    lambda_tar = 3;
+    lambda_tar = 1;
     
     %----- repulsive forcelets parameters ----
     % overall repulsion strength
     beta1_obs = 20;
     % spatial rate of decay
-    beta2_obs = 30;
+    beta2_obs = 0.04;
     % range of the force-let sensor sector
     delta_theta = 30*DEG2RAD; % rad
     
@@ -204,6 +204,9 @@ function moveEpuck()
             [errc(13), jp(2)]=vrep.simxGetJointPosition(clientID, jh(2), vrep.simx_opmode_blocking); 
             enc_new(2)  = jp(2)*ROBOT_WHEEL_RADUIS; % m
 
+            % get target position
+            [errc(8), tar_pos_vrep]=vrep.simxGetObjectPosition(clientID,th(2),-1,vrep.simx_opmode_blocking);
+            tar_pos= tar_pos_vrep(1:2); % m
 
             % get delta displacements feedback  (position and orientation in the allocentric (world) coordinates frame) 
             [enc_old, delta_pos, delta_phi] = getDeltaPosAllo(enc_old, enc_new, rob_ori);
@@ -220,10 +223,6 @@ function moveEpuck()
             
             % compute the direction and distance to target
             [psi_tar, d_tar] = getPsi(rob_pos, tar_pos);
-            
-            % get target position
-            [tar_pos, tar_idx ] = getTargetPosition( tar_positions, tar_pos, d_tar, tar_nbr, tar_idx);
-
   
             % compute rate of change of attractive forcelet   
             delta_phi_tar = getDeltaPhiTarDynamics(psi_tar, rob_ori, lambda_tar, delta_t, tau_t);
@@ -245,9 +244,6 @@ function moveEpuck()
              vrep.simxSetJointTargetVelocity(clientID,jh(1),vl,vrep.simx_opmode_streaming);			
              vrep.simxSetJointTargetVelocity(clientID,jh(2),vr,vrep.simx_opmode_streaming);
 
-             if tar_idx > 4
-                break
-             end
              
              
          end
