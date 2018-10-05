@@ -5,15 +5,16 @@ global ROBOT_WHEEL_RADUIS ROBOT_DISTANCE_BETWEEN_WHEELS
 
 
 % arc lengths
-br = (delta_phi) * (ROBOT_DISTANCE_BETWEEN_WHEELS/2); % m
-bl = -(delta_phi) * (ROBOT_DISTANCE_BETWEEN_WHEELS/2); % m
+arcr = (delta_phi) * (ROBOT_DISTANCE_BETWEEN_WHEELS/2); % m
+arcl = -(delta_phi) * (ROBOT_DISTANCE_BETWEEN_WHEELS/2); % m
 
-br=br/ROBOT_WHEEL_RADUIS;
-bl=bl/ROBOT_WHEEL_RADUIS;
+% arc angles
+angr=arcr/ROBOT_WHEEL_RADUIS; % rad
+angl=arcl/ROBOT_WHEEL_RADUIS; % rad
 
 % right/left wheels velocities
-vr = br / delta_t; % rad/s
-vl = bl / delta_t; % rad/s
+vr = angr / delta_t; % rad/s
+vl = angl / delta_t; % rad/s
 
 
 

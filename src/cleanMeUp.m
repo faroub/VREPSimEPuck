@@ -1,6 +1,7 @@
 function cleanMeUp(clientID,vrep)
-    % stop vrep simulation from Matlab script
+    % make sure that the last command sent out had time to arrive
     vrep.simxGetPingTime(clientID);
+    % stop vrep simulation from Matlab script
     vrep.simxStopSimulation(clientID,vrep.simx_opmode_blocking);
     % close the line if still open
     vrep.simxFinish(clientID); 
