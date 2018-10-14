@@ -1,22 +1,20 @@
-% Dynamical Obstacles Avoidance and Target Acquisition for Robot Navigation using the 
-% Attractor Dynamics Approach 
-% 
+% Robot Navigation using the Attractor Dynamics Approach:
 % This project demonstrates  that the dynamic system approach can be used to generate
 % collision-free paths toward targets while avoid moving obstacles even if low-level sensory
 % information (proximity sensors in this case) is used instead of representations of the
 % environment, see (Althaus et al., 2001) or (Bicho et al., 1998) in docs folder for more information.
 % 
-% The simulation setup:
+% Dynamical Obstacles Avoidance and Targets Acquisition:
 % The dynamics generate a heading direction for a mobile robot that is
 % moving successively but in a random order toward three predefined  targets
 % while avoiding randomly moving obstacles.
-% 
-% The simulation robot used:
-% - ePuck
 %
-% The versions of simulation softwares used :
+% The software tools used:
 % - Matlab 8.5.0.197613 (R2015a) 
 % - V-REP PRO EDU version 3.5.0
+%
+% The simulation robot used:
+% - ePuck
 %
 % To run the simulation:
 % 1 - Start the V-REP simulator and open the simulation scene provided (epuck-dyn-obs-tar.ttt)
@@ -27,17 +25,14 @@
 %           >> moveEpuck(1) :  runs the simulation and plots the dynamics
 %           of the heading direction
 % 4 - If necessary, change the parameters of the dynamics and rerun the simulation  
-% 
-% These files are distributed in the hope that they will be useful,
-% but without any warranty; without even the implied warranty of
-% merchantability or fitness for a particular purpose.
 %
-% Please feel free to use/modify/distribute this file for whatever
-% purpose!.
-%
-% Copyright 2017, Farid Oubbati 
-% f.oubbati@yahoo.fr
+% Author:
+% Farid Oubbati
 % Date: 12-May-2017
+% Copyright (c) 2017
+%
+% License:
+% This project is licensed under the MIT License - see the LICENSE.txt file for more details
 
 function moveEpuck(plot_dynamics)
     
@@ -302,8 +297,8 @@ function moveEpuck(plot_dynamics)
              
              % send commands to the robot
              %vrep.simxPauseCommunication(clientID,1);
-%               vrep.simxSetJointTargetVelocity(clientID,jh(1),vl,vrep.simx_opmode_streaming);			
-%               vrep.simxSetJointTargetVelocity(clientID,jh(2),vr,vrep.simx_opmode_streaming);
+             vrep.simxSetJointTargetVelocity(clientID,jh(1),vl,vrep.simx_opmode_streaming);			
+             vrep.simxSetJointTargetVelocity(clientID,jh(2),vr,vrep.simx_opmode_streaming);
              %vrep.simxPauseCommunication(clientID,0);
              
              if tar_idx > 4
@@ -314,16 +309,12 @@ function moveEpuck(plot_dynamics)
              
              % plot dynamics
              plotDynamics(rob_ori, delta_phi, phasePlot, targetPlot, phasePlotRange, delta_phi_tar_range, delta_phi_obs_range, psi_tar, plot_dynamics);
-             
-             
+
              % move simulation ahead one time step
              vrep.simxSynchronousTrigger(clientID);
              vrep.simxGetPingTime(clientID);
-            
-            
-                          
-         end
-
+              
+        end
     else
 		disp('Failed connecting to remote API server');
     end

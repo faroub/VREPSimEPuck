@@ -3,7 +3,7 @@
 This project demonstrates that the dynamic system approach can be used to generate
 collision-free paths toward targets while avoid moving obstacles even if low-level sensory
 information (proximity sensors in this case) is used instead of representations of the
-environment, see (Althaus et al., 2001) or (Bicho et al., 1998) in [docs/](docs/) folder for more information.
+environment, see (Althaus et al., 2001) or (Bicho et al., 1998) in [docs](docs/) folder for more information.
 
 ## Dynamical Obstacles Avoidance and Targets Acquisition
 
@@ -43,4 +43,4 @@ runs the simulation and plots the dynamics of the heading direction
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details
+This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for more details
