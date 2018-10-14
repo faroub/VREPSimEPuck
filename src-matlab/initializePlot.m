@@ -32,7 +32,7 @@ function  [plot_range, phasePlotRange, phasePlot, targetPlot, delta_phi_tar_rang
         hold on
         phasePlot = plot(phasePlotAxes,0,0,'o', 'MarkerFaceColor', 'k', 'MarkerSize', 8);
         targetPlot = plot(phasePlotAxes,0,0,'x', 'MarkerFaceColor', 'c', 'MarkerSize', 8);
-        set(phasePlotAxes,'XLim',[-pi pi],'YLim',[-5 5]);
+        set(phasePlotAxes,'XLim',[-pi pi],'YLim',[-8 8]);
         grid on;
         xlabel( '\phi' );
         ylabel( 'd\phi / dt' );

@@ -43,7 +43,7 @@ function moveEpuck(plot_dynamics)
 	disp('Program started');
 
     % plot_dynamics = set to 1 if dynamics should be plotted
-    if nargin<1 plot_dynamics=0; end;
+    if nargin<1 plot_dynamics=1; end;
     
     % call constants into workspace
     mathConstants
@@ -55,9 +55,9 @@ function moveEpuck(plot_dynamics)
     
     %----- repulsive forcelets parameters ----
     % overall repulsion strength
-    beta1_obs = 10;
+    beta1_obs = 20;
     % spatial rate of decay
-    beta2_obs = 0.2;
+    beta2_obs = 0.5;
     % range of the force-let sensor sector
     delta_theta = 40*DEG2RAD; % rad
     
@@ -126,14 +126,14 @@ function moveEpuck(plot_dynamics)
          
         % retrieve robot handle 
         [err_code,rh]=vrep.simxGetObjectHandle(clientID,'ePuck',vrep.simx_opmode_blocking);
-        while (err_code~=vrep.simx_error_noerror)  
+        while (err_code~=vrep.simx_return_ok)  
             [err_code,rh]=vrep.simxGetObjectHandle(clientID,'ePuck',vrep.simx_opmode_blocking);
         end
 
         % get robot position
         [err_code, rob_pos_vrep]=vrep.simxGetObjectPosition(clientID,rh,-1,vrep.simx_opmode_blocking);
         rob_pos= rob_pos_vrep(1:2); % m
-        while (err_code~=vrep.simx_error_noerror)  
+        while (err_code~=vrep.simx_return_ok)  
             [err_code, rob_pos_vrep]=vrep.simxGetObjectPosition(clientID,rh,-1,vrep.simx_opmode_blocking);
             rob_pos= rob_pos_vrep(1:2); % m
         end
@@ -144,7 +144,7 @@ function moveEpuck(plot_dynamics)
         % get robot orientation
         [err_code, rob_ori_vrep]=vrep.simxGetObjectOrientation(clientID,rh,-1,vrep.simx_opmode_blocking);
         rob_ori= rob_ori_vrep(3); % rad
-        while (err_code~=vrep.simx_error_noerror)  
+        while (err_code~=vrep.simx_return_ok)  
             [err_code, rob_ori_vrep]=vrep.simxGetObjectOrientation(clientID,rh,-1,vrep.simx_opmode_blocking);
             rob_ori= rob_ori_vrep(3); % rad
         end
@@ -152,7 +152,7 @@ function moveEpuck(plot_dynamics)
         % retrieve targets handles
         for i = 1:size(th,2)
             [err_code, th(i)]=vrep.simxGetObjectHandle(clientID,sprintf('%s%d','tarPos',i),vrep.simx_opmode_blocking);
-            while (err_code~=vrep.simx_error_noerror)  
+            while (err_code~=vrep.simx_return_ok)  
                 [err_code, th(i)]=vrep.simxGetObjectHandle(clientID,sprintf('%s%d','tarPos',i),vrep.simx_opmode_blocking);
             end
         end
@@ -161,7 +161,7 @@ function moveEpuck(plot_dynamics)
         for i = 1:size(th,2)
             [err_code, tar_pos_vrep]=vrep.simxGetObjectPosition(clientID,th(i),-1,vrep.simx_opmode_blocking);
             tar_positions(i,1:2)= tar_pos_vrep(1:2); % m
-            while (err_code~=vrep.simx_error_noerror)  
+            while (err_code~=vrep.simx_return_ok)  
                 [err_code, tar_pos_vrep]=vrep.simxGetObjectPosition(clientID,th(i),-1,vrep.simx_opmode_blocking);
                 tar_positions(i,1:2)= tar_pos_vrep(1:2); % m
             end
@@ -169,29 +169,29 @@ function moveEpuck(plot_dynamics)
 
         % retrieve left joint handle
         [err_code,jh(1)]=vrep.simxGetObjectHandle(clientID,'ePuck_leftJoint',vrep.simx_opmode_blocking);
-        while (err_code~=vrep.simx_error_noerror)  
+        while (err_code~=vrep.simx_return_ok)  
             [err_code,jh(1)]=vrep.simxGetObjectHandle(clientID,'ePuck_leftJoint',vrep.simx_opmode_blocking);
         end
 
         % get right joint handle
         [err_code,jh(2)]=vrep.simxGetObjectHandle(clientID,'ePuck_rightJoint',vrep.simx_opmode_blocking);
-        while (err_code~=vrep.simx_error_noerror)  
+        while (err_code~=vrep.simx_return_ok)  
             [err_code,jh(2)]=vrep.simxGetObjectHandle(clientID,'ePuck_rightJoint',vrep.simx_opmode_blocking);
         end 
 
         % get joints handles and initial encoders values 
         for i = 1:size(jh,2)
             % set initial joint initial encoder value
-            [err_code]=vrep.simxSetJointPosition(clientID, jh(i), 0, vrep.simx_opmode_oneshot);
-            while (err_code~=vrep.simx_error_noerror) 
-                        [err_code]=vrep.simxSetJointPosition(clientID, jh(i), 0, vrep.simx_opmode_oneshot);
+            [err_code]=vrep.simxSetJointPosition(clientID, jh(i), 0, vrep.simx_opmode_blocking);
+            while (err_code~=vrep.simx_return_ok) 
+                        [err_code]=vrep.simxSetJointPosition(clientID, jh(i), 0, vrep.simx_opmode_blocking);
             end
             
             % get joints initial encoders values 
             [err_code, jp(i)]=vrep.simxGetJointPosition(clientID, jh(i), vrep.simx_opmode_streaming);
             enc_old(i)  =jp(i)*ROBOT_WHEEL_RADUIS; % m
             enc_new(i) =enc_old(i); % m
-            while (err_code~=vrep.simx_error_noerror)  
+            while (err_code~=vrep.simx_return_ok)  
                 [err_code, jp(i)]=vrep.simxGetJointPosition(clientID, jh(i), vrep.simx_opmode_streaming);
                 enc_old(i)  =jp(i)*ROBOT_WHEEL_RADUIS; % m
                 enc_new(i) =enc_old(i); % m
@@ -201,7 +201,7 @@ function moveEpuck(plot_dynamics)
         % retrieve proximity sensors handles 
         for i = 1:size(psh,2)
             [err_code,psh(i)]=vrep.simxGetObjectHandle(clientID,sprintf('%s%d','ePuck_proxSensor',i),vrep.simx_opmode_blocking);
-            while (err_code~=vrep.simx_error_noerror)
+            while (err_code~=vrep.simx_return_ok)
                 [err_code,psh(i)]=vrep.simxGetObjectHandle(clientID,sprintf('%s%d','ePuck_proxSensor',i),vrep.simx_opmode_blocking);
             end
         end
@@ -209,7 +209,7 @@ function moveEpuck(plot_dynamics)
         % retrieve obstacles handles 
         for i = 1:size(obsh,2)
             [err_code,obsh(i)]=vrep.simxGetObjectHandle(clientID,sprintf('%s%d','obstPos',i),vrep.simx_opmode_blocking);
-            while (err_code~=vrep.simx_error_noerror)
+            while (err_code~=vrep.simx_return_ok)
                 [err_code,obsh(i)]=vrep.simxGetObjectHandle(clientID,sprintf('%s%d','obstPos',i),vrep.simx_opmode_blocking);
             end
         end
@@ -218,7 +218,7 @@ function moveEpuck(plot_dynamics)
         for i = 1:size(obsh,2)
             [err_code, obs_pos_vrep]=vrep.simxGetObjectPosition(clientID,obsh(i),-1,vrep.simx_opmode_blocking);
             obs_positions(i,1:3)= obs_pos_vrep; % m
-            while (err_code~=vrep.simx_error_noerror)
+            while (err_code~=vrep.simx_return_ok)
                 [err_code, obs_pos_vrep]=vrep.simxGetObjectPosition(clientID,obsh(i),-1,vrep.simx_opmode_blocking);
                 obs_positions(i,1:3)= obs_pos_vrep; % m
             end
@@ -249,6 +249,7 @@ function moveEpuck(plot_dynamics)
         % start vrep simulation
         vrep.simxStartSimulation(clientID,vrep.simx_opmode_blocking);
         
+               
         disp('V-REP simulation started');
         
         while (vrep.simxGetConnectionId(clientID)>-1)           
@@ -256,7 +257,11 @@ function moveEpuck(plot_dynamics)
             % get joint encoders values
             for i = 1:size(jh,2)
                 [err_code, jp(i)]=vrep.simxGetJointPosition(clientID, jh(i), vrep.simx_opmode_buffer); 
-                enc_new(i)  = jp(i)*ROBOT_WHEEL_RADUIS; % m 
+                enc_new(i)  = jp(i)*ROBOT_WHEEL_RADUIS; % m
+                while (err_code~=vrep.simx_return_ok)  
+                    [err_code, jp(i)]=vrep.simxGetJointPosition(clientID, jh(i), vrep.simx_opmode_buffer); 
+                    enc_new(i)  = jp(i)*ROBOT_WHEEL_RADUIS; % m
+                end
             end
             
             % get delta displacements feedback  (position and orientation in the allocentric (world) coordinates frame) 
@@ -296,10 +301,10 @@ function moveEpuck(plot_dynamics)
              vl = vl + rob_vel;
              
              % send commands to the robot
-             %vrep.simxPauseCommunication(clientID,1);
-             vrep.simxSetJointTargetVelocity(clientID,jh(1),vl,vrep.simx_opmode_streaming);			
-             vrep.simxSetJointTargetVelocity(clientID,jh(2),vr,vrep.simx_opmode_streaming);
-             %vrep.simxPauseCommunication(clientID,0);
+             vrep.simxPauseCommunication(clientID,1);
+             vrep.simxSetJointTargetVelocity(clientID,jh(1),vl,vrep.simx_opmode_oneshot);			
+             vrep.simxSetJointTargetVelocity(clientID,jh(2),vr,vrep.simx_opmode_oneshot);
+             vrep.simxPauseCommunication(clientID,0);
              
              if tar_idx > 4
                 break
