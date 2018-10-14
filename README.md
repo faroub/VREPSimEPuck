@@ -11,28 +11,33 @@ The dynamics generate a heading direction for a mobile robot that is
 moving successively but in a random order toward three predefined  targets
 while avoiding randomly moving obstacles.
 
+## The software tools used:
+
+* Matlab 8.5.0.197613 (R2015a)
+* V-REP PRO EDU version 3.5.0
+
 ## The simulation robot used:
 
 * ePuck
 
-## The versions of simulation softwares used:
-
-* Matlab 8.5.0.197613 (R2015a) 
-* V-REP PRO EDU version 3.5.0
-
 ## To run the simulation:
 
-1. Start the V-REP simulator and open the simulation scene provided (epuck-dyn-obs-tar.ttt)
+1. Start the V-REP simulator and open the simulation scene (epuck-dyn-obs-tar.ttt) provided in /src-vrep
 2. Start Matlab and change to simulation files folder or add its path
 3. Start simulation with: 
+  * runs the simulation without plotting the dynamics of the heading direction
 
 ```
 >> moveEpuck
 ```
- runs the simulation without plotting the dynamics of the heading direction
+  * runs the simulation and plots the dynamics of the heading direction
 ```
 >> moveEpuck(1)
 ```
-runs the simulation and plots the dynamics of the heading direction
+4. If necessary, change the parameters of the dynamics and rerun the simulation
 
-4. If necessary, change the parameters of the dynamics and rerun the simulation  
+## Author
+
+Farid Oubbati (f.oubbati@yahoo.fr)
+Date: 12-May-2017
+Copyright 2017
