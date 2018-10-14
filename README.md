@@ -1,2 +1,2 @@
-# This is an <h1> tag
-# This is an <h1> tag
+# Dynamical Obstacles Avoidance and Target Acquisition for Robot Navigation using the Attractor Dynamics Approach
+
