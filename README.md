@@ -1,7 +1,7 @@
 # Robot Navigation using the Attractor Dynamics Approach
 
 This project demonstrates that the dynamic system approach can be used to generate
-collision-free paths toward targets while avoid moving obstacles even if low-level sensory
+collision-free paths toward targets while avoiding moving obstacles even if low-level sensory
 information (proximity sensors in this case) is used instead of representations of the
 environment, see (Althaus et al., 2001) or (Bicho et al., 1998) in [docs](docs/) folder for more information
 
@@ -12,6 +12,8 @@ moving successively but in a random order toward three predefined  targets
 while avoiding randomly moving obstacles
 
 <img src="/pics/simulation-scene.png" alt="alt text" width="570">
+
+Video of the simulation can be seen seen [here](https://youtu.be/9FMPPFUlc7k)
 
 ## The software tools used:
 
@@ -40,7 +42,7 @@ runs the simulation and plots the dynamics of the heading direction
 
 <img src="/pics/dynamics-plot.png" alt="alt text" width="370">
 
-4. If necessary, change the parameters of the dynamics and rerun the simulation
+4. If necessary, change the parameters of the dynamics and re-run the simulation
 
 ## Author
 
