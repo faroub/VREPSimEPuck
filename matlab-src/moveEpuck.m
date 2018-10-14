@@ -4,7 +4,7 @@
 % This project demonstrates  that the dynamic system approach can be used to generate
 % collision-free paths toward targets while avoid moving obstacles even if low-level sensory
 % information (proximity sensors in this case) is used instead of representations of the
-% environment, see (Althaus et al., 2001) or (Bicho et al., 1998) for more information.
+% environment, see (Althaus et al., 2001) or (Bicho et al., 1998) in docs folder for more information.
 % 
 % The simulation setup:
 % The dynamics generate a heading direction for a mobile robot that is
