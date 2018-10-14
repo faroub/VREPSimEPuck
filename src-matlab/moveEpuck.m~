@@ -55,11 +55,11 @@ function moveEpuck(plot_dynamics)
     
     %----- repulsive forcelets parameters ----
     % overall repulsion strength
-    beta1_obs = 15;
+    beta1_obs = 20;
     % spatial rate of decay
-    beta2_obs = 0.5;
+    beta2_obs = 0.7;
     % range of the force-let sensor sector
-    delta_theta = 20*DEG2RAD; % rad
+    delta_theta = 40*DEG2RAD; % rad
     
     %----- simulation parameters ----
     % step time

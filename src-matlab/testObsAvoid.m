@@ -1,7 +1,7 @@
 
 % for one repeller
 beta_1=20;
-beta_2=1;
+beta_2=0.5;
 dist_obs=zeros(1,100);
 lambda_obs=zeros(1,100);
 rob_rad=0.053/2;
