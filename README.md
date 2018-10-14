@@ -25,12 +25,11 @@ while avoiding randomly moving obstacles.
 1. Start the V-REP simulator and open the simulation scene (epuck-dyn-obs-tar.ttt) provided in /src-vrep
 2. Start Matlab and change to simulation files folder or add its path
 3. Start simulation with: 
-  * runs the simulation without plotting the dynamics of the heading direction
-
+runs the simulation without plotting the dynamics of the heading direction
 ```
 >> moveEpuck
 ```
-  * runs the simulation and plots the dynamics of the heading direction
+runs the simulation and plots the dynamics of the heading direction
 ```
 >> moveEpuck(1)
 ```
@@ -38,6 +37,10 @@ while avoiding randomly moving obstacles.
 
 ## Author
 
-Farid Oubbati (f.oubbati@yahoo.fr)
-Date: 12-May-2017
-Copyright 2017
+* Farid Oubbati
+* Date: 12-May-2017
+* Copyright (c) 2017
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
