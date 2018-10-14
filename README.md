@@ -11,7 +11,7 @@ The dynamics generate a heading direction for a mobile robot that is
 moving successively but in a random order toward three predefined  targets
 while avoiding randomly moving obstacles
 
-<img src="/pics/simulation-scene.png" alt="alt text" width="370">
+<img src="/pics/simulation-scene.png" alt="alt text" width="570">
 
 ## The software tools used:
 
