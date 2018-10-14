@@ -26,17 +26,18 @@ while avoiding randomly moving obstacles
 2. Start Matlab and change to simulation files folder or add its path
 3. Start simulation with: 
 
-runs the simulation without plotting the dynamics of the heading direction
 ```
 >> moveEpuck
+```
+runs the simulation without plotting the dynamics of the heading direction
+
+```
+>> moveEpuck(1)
 ```
 runs the simulation and plots the dynamics of the heading direction
 
 <img src="/pics/dynamics-plot.png" alt="alt text" width="370">
 
-```
->> moveEpuck(1)
-```
 4. If necessary, change the parameters of the dynamics and rerun the simulation
 
 ## Author
