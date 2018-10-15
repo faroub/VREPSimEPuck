@@ -59,7 +59,7 @@ function moveEpuck(plot_dynamics)
     % spatial rate of decay
     beta2_obs = 0.5;
     % range of the force-let sensor sector
-    delta_theta = 20*DEG2RAD; % rad
+    delta_theta = 40*DEG2RAD; % rad
     
     %----- simulation parameters ----
     % step time
@@ -236,7 +236,6 @@ function moveEpuck(plot_dynamics)
         % target selection
         tar_nbr(1,1:size(th,2))=randperm(size(th,2));
         tar_pos = tar_positions(tar_nbr(tar_idx),:);
-        %tar_pos = tar_positions(2,:);
 
         % set obstacles movement behaviors
         obs_positions(1:size(obsh,2),4)=randi([1 8],1,size(obsh,2));

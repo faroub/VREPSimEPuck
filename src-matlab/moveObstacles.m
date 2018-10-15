@@ -26,7 +26,7 @@ for i = 1:size(obs_positions,1)
     obs_positions(i,4)=randi([1 8],1);
     
     % increase temporary obstacle movement step size
-    obs_positions(i,5)=0.01; % m
+    obs_positions(i,5)=2*obs_move_step; % m
     
  end
 
@@ -50,7 +50,7 @@ for i = 1:size(obs_positions,1)
                 end
                 
                 % increase temporary obstacle movement step size
-                obs_positions(i,5)=0.01; % m
+                obs_positions(i,5)=2*obs_move_step; % m
 
             end
         end

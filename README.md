@@ -13,7 +13,7 @@ while avoiding randomly moving obstacles
 
 <img src="/pics/simulation-scene.png" alt="alt text" width="570">
 
-Video of the simulation can be seen seen [here](https://youtu.be/9FMPPFUlc7k)
+Video of the simulation can be seen seen [here](https://youtu.be/OncJcgg6dec)
 
 ## The software tools used:
 

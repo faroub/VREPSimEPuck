@@ -16,7 +16,7 @@ psi_obs =(ROBOT_PROXIMITY_SENSORS_DIRECTIONS+ phi); % rad
 lambda_obs =  beta_1 * exp( -beta_2*dist_obs / rob_rad );
 
 % angular range of obstacles influence
-sigma_obs = atan( tan( delta_theta) + (rob_rad./ ( dist_obs + rob_rad )));
+sigma_obs = atan( (tan( delta_theta)/2) + (rob_rad./ ( dist_obs + rob_rad )));
 
 % prepare data for plot dynamics
 if plot_dynamics==1
